@@ -1,0 +1,12 @@
+# depslib dependency file v1.0
+1743445502 source:e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\framework\framework_validation\main.c
+	<stdio.h>
+	<stdlib.h>
+
+1763059142 source:e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\framework\framework_validation\core\avl.c
+	<stdio.h>
+	<stdlib.h>
+	"avl.h"
+
+1763059137 e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\framework\framework_validation\core\avl.h
+
