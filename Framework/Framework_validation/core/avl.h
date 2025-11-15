@@ -1,17 +1,17 @@
 #ifndef AVL_H_INCLUDED
 #define AVL_H_INCLUDED
 
-typedef struct no{
+typedef struct noavl{
     void* dado;
-    struct no* dir, *esq;
+    struct noavl* dir, *esq;
     int altura;
 }NoAvl;
 
 typedef struct avl{
     NoAvl* raiz;
 }AVL;
-
-NoAvl* CriarNovoNo(void* dado);
+AVL* IniciarAvl();
+NoAvl* CriarNovoNoAvl(void* dado);
 NoAvl* InserirAvl(NoAvl* raiz, void* novoDado, int (*comparar)(void*, void*));
 NoAvl* BuscarAvl (NoAvl* raiz, void* valoChave, int (*comparar)(void*, void*));
 
@@ -27,6 +27,12 @@ int AlturaDoNo(NoAvl* no);
 int FatorDeBalanceamento(NoAvl* no);
 
 NoAvl* Balancear(NoAvl* raiz);
+
+
+void ImprimirAvl(NoAvl* raiz, void(*ExibirDados)(void*));
+
+//Funções utilitárias
+
 
 
 #endif // AVL_H_INCLUDED

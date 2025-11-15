@@ -1,8 +1,16 @@
 #include<stdio.h>
 #include<stdlib.h>
+#include<string.h>
 #include"avl.h"
+#include"util.h"
 
-NoAvl* CriarNovoNo(void* _dado){
+AVL* IniciarAvl(){
+    AVL* arvore = malloc(sizeof(AVL));
+    arvore->raiz=NULL;
+    return arvore;
+}
+
+NoAvl* CriarNovoNoAvl(void* _dado){
     NoAvl* novoNoAVL = malloc(sizeof(NoAvl));
     if(novoNoAVL==NULL){
         printf("Erro ao alocar memoria\n");
@@ -18,9 +26,12 @@ NoAvl* CriarNovoNo(void* _dado){
 
 }
 
+
+
+
 NoAvl* InserirAvl(NoAvl* raiz, void* novoDado, int (*comparar)(void*, void*)){
     if(raiz==NULL){
-        return CriarNovoNo(novoDado);
+        return CriarNovoNoAvl(novoDado);
     }
     else{
         int comparacao = comparar(novoDado, raiz->dado);
@@ -104,6 +115,8 @@ NoAvl* RemoverNoAvl(NoAvl* raiz, void* valoChave, int (*comparar)(void*, void*))
             raiz->dir = RemoverNoAvl(raiz->dir, valoChave, comparar);
         }
     }
+    raiz->altura = Maior(AlturaDoNo(raiz->esq), AlturaDoNo(raiz->dir))+1;
+    raiz = Balancear(raiz);
     return raiz;
 
 
@@ -197,6 +210,24 @@ NoAvl* Balancear(NoAvl* raiz){
     }
     return raiz;
 }
+
+//----------------------
+
+void ImprimirAvl(NoAvl* raiz, void(*ExibirDados)(void*)){
+    ExibirDados(raiz->dado);
+    if(raiz->esq!=NULL){
+        ImprimirAvl(raiz->esq, ExibirDados);
+    }
+    if(raiz->dir!=NULL){
+        ImprimirAvl(raiz->dir, ExibirDados);
+    }
+
+}
+
+
+
+
+
 
 
 

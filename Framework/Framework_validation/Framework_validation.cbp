@@ -31,6 +31,22 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="core/avl.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="core/avl.h" />
+		<Unit filename="core/hash.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="core/hash.h" />
+		<Unit filename="core/listaEncadeada.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="core/listaEncadeada.h" />
+		<Unit filename="core/util.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="core/util.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
