@@ -6,12 +6,12 @@
 
 void ExibirDadosInt(void* a){
 
-    printf("Dado: %i\n", *(int*)a);
+    printf("%i\n", *(int*)a);
 
 }
 void ExibirDadosString(void* a){
 
-    printf("Dado: %s\n", (char*)a);
+    printf("%s\n", (char*)a);
 
 }
 

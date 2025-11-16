@@ -1,10 +1,11 @@
 # depslib dependency file v1.0
-1763228860 source:e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\framework\framework_validation\main.c
+1763263277 source:e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\framework\framework_validation\main.c
 	<stdio.h>
 	<stdlib.h>
+	<string.h>
 	"core/avl.h"
-	"core/listaEncadeada.h"
 	"core/util.h"
+	"core/hash.h"
 
 1763228716 source:e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\framework\framework_validation\core\avl.c
 	<stdio.h>
@@ -15,14 +16,17 @@
 
 1763228711 e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\framework\framework_validation\core\avl.h
 
-1763227849 source:e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\framework\framework_validation\core\hash.c
+1763263097 source:e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\framework\framework_validation\core\hash.c
 	<stdlib.h>
 	<stdio.h>
 	<string.h>
+	"hash.h"
+	"util.h"
+	"listaEncadeada.h"
 
-1763228711 e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\framework\framework_validation\core\listaencadeada.h
+1763262701 e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\framework\framework_validation\core\listaencadeada.h
 
-1763229009 source:e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\framework\framework_validation\core\listaencadeada.c
+1763262595 source:e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\framework\framework_validation\core\listaencadeada.c
 	<stdlib.h>
 	<stdio.h>
 	<string.h>
@@ -31,9 +35,12 @@
 
 1763228711 e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\framework\framework_validation\core\util.h
 
-1763228901 source:e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\framework\framework_validation\core\util.c
+1763258829 source:e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\framework\framework_validation\core\util.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"util.h"
+
+1763263036 e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\framework\framework_validation\core\hash.h
+	"listaEncadeada.h"
 

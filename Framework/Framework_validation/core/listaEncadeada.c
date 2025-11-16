@@ -48,7 +48,7 @@ void RemoverLista(Lista* lista, void*dado, int(*Comparar)(void*, void*)){
 
 }
 
-void* BuscarLista(Lista* lista, void*dado, int(*Comparar)(void*, void*), void(*RetornarDadoBuscado)(void*)){
+void* BuscarLista(Lista* lista, void*dado, int(*Comparar)(void*, void*), void*(*RetornarDadoBuscado)(void*)){
     NoLista* atual = lista->cabeca->prox;
     while(atual!=NULL && Comparar(dado, atual->dado)!=0){
         atual=atual->prox;
@@ -58,7 +58,7 @@ void* BuscarLista(Lista* lista, void*dado, int(*Comparar)(void*, void*), void(*R
         return NULL;
     }
     else{
-        RetornarDadoBuscado(atual->dado);
+        return RetornarDadoBuscado(atual->dado);
     }
 }
 

@@ -18,7 +18,7 @@ void InserirLista(Lista* lista, void* dado);
 
 void RemoverLista(Lista* lista, void*dado, int(*Comparar)(void*, void*));
 
-void* BuscarLista(Lista* lista, void*dado, int(*Comparar)(void*, void*), void(*RetornarDadoBuscado)(void*));
+void* BuscarLista(Lista* lista, void*dado, int(*Comparar)(void*, void*), void*(*RetornarDadoBuscado)(void*));
 
 void ImprimirLista(Lista* lista, void(*ExibirDados)(void*));
 
