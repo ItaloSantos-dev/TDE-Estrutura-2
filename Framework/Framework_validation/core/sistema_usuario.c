@@ -8,7 +8,7 @@
 SistemaUsuario* IniciarSistemaUsuarios(){
     SistemaUsuario* novoSistemaUsuarios = malloc(sizeof(SistemaUsuario));
     novoSistemaUsuarios->arvoreUsuarios = IniciarAvl();
-    novoSistemaUsuarios->tabelaPorEmail = CriarNovaHash(15);
+    novoSistemaUsuarios->tabelaPorEmail = CriarNovaHash(2);
     novoSistemaUsuarios->listaEncadeada = CriarNovaLista();
     return novoSistemaUsuarios;
 
@@ -33,10 +33,10 @@ int ValidarStringEmail(char* _email){
     }
 }
 
-int InserirUsuarioEstruturas(AVL* arvore, Hash* tabelahash, User* novoUsuario){
-    if(ValidarNovoemail(tabelahash, novoUsuario) && ValidarStringEmail(novoUsuario->email)){
-        arvore->raiz = InserirAvl(arvore->raiz, novoUsuario, CompararUsuarioPorEmail);
-        InserirHash(tabelahash, novoUsuario->email, novoUsuario, FuncaoDeEspalhamentoString, ExibirDadosString, ImprimirUsuario);
+int InserirUsuarioEstruturas(SistemaUsuario* sistemaIniciado, User* novoUsuario){
+    if(ValidarNovoemail(sistemaIniciado->tabelaPorEmail, novoUsuario) && ValidarStringEmail(novoUsuario->email)){
+        sistemaIniciado->arvoreUsuarios->raiz = InserirAvl(sistemaIniciado->arvoreUsuarios, sistemaIniciado->arvoreUsuarios->raiz, novoUsuario, CompararUsuarioPorEmail);
+        sistemaIniciado->tabelaPorEmail = InserirHash(sistemaIniciado->tabelaPorEmail, novoUsuario->email, novoUsuario, FuncaoDeEspalhamentoString, ExibirDadosString, ImprimirUsuario);
         return 1;
     }
     else{
@@ -51,7 +51,7 @@ int CadastrarUsuario(SistemaUsuario* sistemaIniciado){
     }
     else{
         User* novoUsuario = CapturarDadosParaCadastro(sistemaIniciado);
-        if(InserirUsuarioEstruturas(sistemaIniciado->arvoreUsuarios, sistemaIniciado->tabelaPorEmail, novoUsuario)){
+        if(InserirUsuarioEstruturas(sistemaIniciado, novoUsuario)){
             return 1;
         }
         else{
@@ -62,7 +62,7 @@ int CadastrarUsuario(SistemaUsuario* sistemaIniciado){
 }
 
 User* CapturarDadosParaCadastro(SistemaUsuario* sistemaIniciado){
-    int id = ++(sistemaIniciado->arvoreUsuarios->quantidadeno);
+    int id = sistemaIniciado->arvoreUsuarios->quantidadeno +1;
     char nome[100];
     char sobrenome[100];
     char email[100];

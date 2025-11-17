@@ -14,10 +14,10 @@ typedef struct avl{
 }AVL;
 AVL* IniciarAvl();
 NoAvl* CriarNovoNoAvl(void* dado);
-NoAvl* InserirAvl(NoAvl* raiz, void* novoDado, int (*comparar)(void*, void*));
+NoAvl* InserirAvl(AVL* arvore, NoAvl* raiz, void* novoDado, int (*comparar)(void*, void*));
 NoAvl* BuscarAvl (NoAvl* raiz, void* valoChave, int (*comparar)(void*, void*));
 
-NoAvl* RemoverNoAvl(NoAvl* raiz, void* valoChave, int (*comparar)(void*, void*));
+NoAvl* RemoverNoAvl(AVL* arvore,NoAvl* raiz, void* valoChave, int (*comparar)(void*, void*));
 NoAvl* RotacaoSimplesDir(NoAvl* raiz);
 NoAvl* RotacaoSimplesEsq(NoAvl* raiz);
 NoAvl* RotacaoEsqDir(NoAvl* raiz);

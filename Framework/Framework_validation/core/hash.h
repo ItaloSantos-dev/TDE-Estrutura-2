@@ -5,6 +5,7 @@
 typedef struct h{
     Lista** hashVetor;
     int tamanhoVetorHash;
+    int quantidadeEntradaHash;
 
 }Hash;
 
@@ -22,10 +23,13 @@ void ImprimirEntradaHash(void* dado);
 int FuncaoDeEspalhamentoInt(int tamanhoVetor, void* chave);
 int FuncaoDeEspalhamentoString(int tamanhoVetor, void* chave);
 
-void InserirHash(Hash* tabelHash, void* chave, void* valor, int(*FuncaoDeEspalhamento)(int,void*), void(*ExibirChave)(void*), void(*ExibirValor)(void*));
+Hash* InserirHash(Hash* tabelHash, void* chave, void* valor, int(*FuncaoDeEspalhamento)(int,void*), void(*ExibirChave)(void*), void(*ExibirValor)(void*));
 void ImprimirHash(Hash* tabelaHash, void(*Imprimir)(void*));
 EntradaHash* BuscarHash(Hash* tabelaHash, void* chave, int(*FuncaoDeEspalhamento)(int,void*), int(*Comparar)(void*,void*) );
 int CompararEntradaHashChave(void* _chave, void* _entradaHash);
 void* RetornarEntradaHash(void* entradaHash);
+Hash* RealocarMemoria(Hash* tabelaHash);
+Hash* CopiarTabelaHash(Hash* hashAntiga, Hash* hashNova);
+double FatorDeCarga(Hash* tabelaHash);
 
 #endif // HASH_H_INCLUDED

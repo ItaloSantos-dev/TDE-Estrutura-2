@@ -18,7 +18,7 @@ int CadastrarUsuario(SistemaUsuario* sistemaIniciado);
 User* LoginUsuario (SistemaUsuario* sistemaIniciado, char* _email, char*_senha);
 User* CapturarDadosParaCadastro(SistemaUsuario* sistemaIniciado);
 
-int InserirUsuarioEstruturas(AVL* arvore, Hash* tabelahash, User* novoUsuario);
+int InserirUsuarioEstruturas(SistemaUsuario* sistemaIniciado, User* novoUsuario);
 
 
 int ValidarNovoemail(Hash* tabelaHash, User* novousuario);

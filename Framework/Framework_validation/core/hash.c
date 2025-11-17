@@ -9,6 +9,7 @@ Hash* CriarNovaHash(int tamanho){
     Hash* NovaHash = malloc(sizeof(Hash));
     NovaHash->tamanhoVetorHash = tamanho;
     NovaHash->hashVetor = malloc(tamanho*sizeof(Lista*));
+    NovaHash->quantidadeEntradaHash=0;
     for(int i=0; i<tamanho; i++){
         NovaHash->hashVetor[i]=CriarNovaLista();
     }
@@ -50,12 +51,14 @@ EntradaHash* CriarNovaEntradaHash(void* chave, void* valor, void(*ExibirChave)(v
     return novaEntradaHash;
 }
 
-void InserirHash(Hash* tabelHash, void* chave, void* valor, int(*FuncaoDeEspalhamento)(int,void*), void(*ExibirChave)(void*), void(*ExibirValor)(void*)){
+Hash* InserirHash(Hash* tabelHash, void* chave, void* valor, int(*FuncaoDeEspalhamento)(int,void*), void(*ExibirChave)(void*), void(*ExibirValor)(void*)){
 
     int posicao = FuncaoDeEspalhamento (tabelHash->tamanhoVetorHash, chave);
     EntradaHash* novaEntradaHash = CriarNovaEntradaHash(chave, valor, ExibirChave, ExibirValor);
-
     InserirLista(tabelHash->hashVetor[posicao], novaEntradaHash);
+    tabelHash->quantidadeEntradaHash++;
+    return RealocarMemoria(tabelHash);
+
 
 }
 
@@ -87,6 +90,36 @@ EntradaHash* BuscarHash(Hash* tabelaHash, void* chave, int(*FuncaoDeEspalhamento
     }
     else {
         return NULL;
+    }
+}
+
+double FatorDeCarga(Hash* tabelaHash){
+    return (double) tabelaHash->quantidadeEntradaHash / tabelaHash->tamanhoVetorHash;
+}
+Hash* CopiarTabelaHash(Hash* hashAntiga, Hash* hashNova){
+    for(int i =0; i<hashAntiga->tamanhoVetorHash; i++){
+        if(hashAntiga->hashVetor[i]->cabeca->prox!=NULL){
+            NoLista* atual = hashAntiga->hashVetor[i]->cabeca->prox;
+            while(atual!=NULL){
+                EntradaHash* entradaHashAtual = (EntradaHash*) atual->dado;
+                InserirHash(hashNova, entradaHashAtual->chave, entradaHashAtual->valor, FuncaoDeEspalhamentoString, entradaHashAtual->ImprimirChave, entradaHashAtual->ImprimirValor);
+                atual = atual->prox;
+            }
+        }
+    }
+    return hashNova;
+}
+
+Hash* RealocarMemoria(Hash* tabelaHash){
+    double FC = FatorDeCarga(tabelaHash);
+    printf("FC: %f\n", FC);
+    if(FC>0.6){
+        Hash* novaTabelaHash = CriarNovaHash(tabelaHash->tamanhoVetorHash*2);
+        novaTabelaHash = CopiarTabelaHash(tabelaHash, novaTabelaHash);
+        return novaTabelaHash;
+    }
+    else{
+        return tabelaHash;
     }
 }
 

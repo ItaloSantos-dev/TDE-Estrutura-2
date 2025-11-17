@@ -30,18 +30,20 @@ NoAvl* CriarNovoNoAvl(void* _dado){
 
 
 
-NoAvl* InserirAvl(NoAvl* raiz, void* novoDado, int (*comparar)(void*, void*)){
+NoAvl* InserirAvl(AVL* arvore, NoAvl* raiz, void* novoDado, int (*comparar)(void*, void*)){
     if(raiz==NULL){
+        arvore->quantidadeno++;
         return CriarNovoNoAvl(novoDado);
+
     }
     else{
         int comparacao = comparar(novoDado, raiz->dado);
 
         if(comparacao<0){
-            raiz->esq = InserirAvl(raiz->esq, novoDado, comparar);
+            raiz->esq = InserirAvl(arvore, raiz->esq, novoDado, comparar);
         }
         else{
-            raiz->dir = InserirAvl(raiz->dir, novoDado, comparar);
+            raiz->dir = InserirAvl(arvore, raiz->dir, novoDado, comparar);
         }
     }
 
@@ -72,7 +74,7 @@ NoAvl* BuscarAvl (NoAvl* raiz, void* valoChave, int (*comparar)(void*, void*)){
 }
 
 
-NoAvl* RemoverNoAvl(NoAvl* raiz, void* valoChave, int (*comparar)(void*, void*)){
+NoAvl* RemoverNoAvl(AVL* arvore, NoAvl* raiz, void* valoChave, int (*comparar)(void*, void*)){
     if(raiz==NULL){
         return NULL;
     }
@@ -81,6 +83,7 @@ NoAvl* RemoverNoAvl(NoAvl* raiz, void* valoChave, int (*comparar)(void*, void*))
         if(comparacao==0){
             if(raiz->esq==NULL && raiz->dir==NULL){
                 free(raiz);
+                arvore->quantidadeno--;
                 return NULL;
             }
             else{
@@ -89,10 +92,8 @@ NoAvl* RemoverNoAvl(NoAvl* raiz, void* valoChave, int (*comparar)(void*, void*))
                     while(aux->dir!=NULL){
                         aux = aux->dir;
                     }
-                    void* temp = raiz->dado;
                     raiz->dado=aux->dado;
-                    aux->dado = temp;
-                    raiz->esq = RemoverNoAvl(raiz->esq, temp, comparar);
+                    raiz->esq = RemoverNoAvl(arvore, raiz->esq, aux->dado, comparar);
                     return raiz;
 
                 }
@@ -105,15 +106,16 @@ NoAvl* RemoverNoAvl(NoAvl* raiz, void* valoChave, int (*comparar)(void*, void*))
                         substituto = raiz->dir;
                     }
                     free(raiz);
+                    arvore->quantidadeno--;
                     return substituto;
                 }
             }
         }
         else if(comparacao<0){
-            raiz->esq = RemoverNoAvl(raiz->esq, valoChave, comparar);
+            raiz->esq = RemoverNoAvl(arvore, raiz->esq, valoChave, comparar);
         }
         else{
-            raiz->dir = RemoverNoAvl(raiz->dir, valoChave, comparar);
+            raiz->dir = RemoverNoAvl(arvore, raiz->dir, valoChave, comparar);
         }
     }
     raiz->altura = Maior(AlturaDoNo(raiz->esq), AlturaDoNo(raiz->dir))+1;

@@ -1,20 +1,20 @@
 # depslib dependency file v1.0
-1763397642 source:e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\framework\framework_validation\main.c
+1763417859 source:e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\framework\framework_validation\main.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"core/sistema_usuario.h"
 
-1763389128 source:e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\framework\framework_validation\core\avl.c
+1763411323 source:e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\framework\framework_validation\core\avl.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"avl.h"
 	"util.h"
 
-1763389128 e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\framework\framework_validation\core\avl.h
+1763411325 e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\framework\framework_validation\core\avl.h
 
-1763390965 source:e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\framework\framework_validation\core\hash.c
+1763417883 source:e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\framework\framework_validation\core\hash.c
 	<stdlib.h>
 	<stdio.h>
 	<string.h>
@@ -39,7 +39,7 @@
 	<string.h>
 	"util.h"
 
-1763390965 e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\framework\framework_validation\core\hash.h
+1763417764 e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\framework\framework_validation\core\hash.h
 	"listaEncadeada.h"
 
 1763382363 source:e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\framework\framework_validation\core\usuario.c
@@ -50,13 +50,13 @@
 
 1763382811 e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\framework\framework_validation\core\usuario.h
 
-1763397731 source:e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\framework\framework_validation\core\sistema_usuario.c
+1763417837 source:e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\framework\framework_validation\core\sistema_usuario.c
 	<stdlib.h>
 	<stdio.h>
 	<string.h>
 	"sistema_usuario.h"
 
-1763397572 e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\framework\framework_validation\core\sistema_usuario.h
+1763417802 e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\framework\framework_validation\core\sistema_usuario.h
 	"avl.h"
 	"util.h"
 	"hash.h"
