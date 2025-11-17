@@ -7,6 +7,7 @@
 AVL* IniciarAvl(){
     AVL* arvore = malloc(sizeof(AVL));
     arvore->raiz=NULL;
+    arvore->quantidadeno=0;
     return arvore;
 }
 

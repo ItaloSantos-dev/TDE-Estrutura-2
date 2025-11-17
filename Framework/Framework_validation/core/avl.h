@@ -5,10 +5,12 @@ typedef struct noavl{
     void* dado;
     struct noavl* dir, *esq;
     int altura;
+
 }NoAvl;
 
 typedef struct avl{
     NoAvl* raiz;
+    int quantidadeno;
 }AVL;
 AVL* IniciarAvl();
 NoAvl* CriarNovoNoAvl(void* dado);

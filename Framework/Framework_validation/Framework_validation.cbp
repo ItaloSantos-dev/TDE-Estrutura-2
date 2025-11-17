@@ -43,6 +43,14 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="core/listaEncadeada.h" />
+		<Unit filename="core/sistema_usuario.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="core/sistema_usuario.h" />
+		<Unit filename="core/usuario.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="core/usuario.h" />
 		<Unit filename="core/util.c">
 			<Option compilerVar="CC" />
 		</Unit>

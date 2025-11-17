@@ -78,13 +78,15 @@ int CompararEntradaHashChave(void* _chave, void* _entradaHash){
     return CompararString(_chave, entradaHash->chave);
 }
 
-void BuscarHash(Hash* tabelaHash, void* chave, int(*FuncaoDeEspalhamento)(int,void*), int(*Comparar)(void*,void*) ){
+EntradaHash* BuscarHash(Hash* tabelaHash, void* chave, int(*FuncaoDeEspalhamento)(int,void*), int(*Comparar)(void*,void*) ){
     int posicao = FuncaoDeEspalhamento(tabelaHash->tamanhoVetorHash, chave);
     EntradaHash* entradaBuscada=BuscarLista(tabelaHash->hashVetor[posicao], chave, CompararEntradaHashChave, RetornarEntradaHash);
 
     if(entradaBuscada){
-        printf("Entrada encontrada---------------------------------------\n");
-        ImprimirEntradaHash(entradaBuscada);
+        return entradaBuscada;
+    }
+    else {
+        return NULL;
     }
 }
 

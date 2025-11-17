@@ -24,7 +24,7 @@ int FuncaoDeEspalhamentoString(int tamanhoVetor, void* chave);
 
 void InserirHash(Hash* tabelHash, void* chave, void* valor, int(*FuncaoDeEspalhamento)(int,void*), void(*ExibirChave)(void*), void(*ExibirValor)(void*));
 void ImprimirHash(Hash* tabelaHash, void(*Imprimir)(void*));
-void BuscarHash(Hash* tabelaHash, void* chave, int(*FuncaoDeEspalhamento)(int,void*), int(*Comparar)(void*,void*) );
+EntradaHash* BuscarHash(Hash* tabelaHash, void* chave, int(*FuncaoDeEspalhamento)(int,void*), int(*Comparar)(void*,void*) );
 int CompararEntradaHashChave(void* _chave, void* _entradaHash);
 void* RetornarEntradaHash(void* entradaHash);
 
