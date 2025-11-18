@@ -45,12 +45,11 @@ int InserirUsuarioEstruturas(SistemaUsuario* sistemaIniciado, User* novoUsuario)
 
 }
 
-int CadastrarUsuario(SistemaUsuario* sistemaIniciado){
+int CadastrarUsuario(SistemaUsuario* sistemaIniciado, User* novoUsuario){
     if(!sistemaIniciado){
         return 0;
     }
     else{
-        User* novoUsuario = CapturarDadosParaCadastro(sistemaIniciado);
         if(InserirUsuarioEstruturas(sistemaIniciado, novoUsuario)){
             return 1;
         }

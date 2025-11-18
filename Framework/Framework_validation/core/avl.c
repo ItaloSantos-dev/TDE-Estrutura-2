@@ -75,12 +75,15 @@ NoAvl* BuscarAvl (NoAvl* raiz, void* valoChave, int (*comparar)(void*, void*)){
 
 
 NoAvl* RemoverNoAvl(AVL* arvore, NoAvl* raiz, void* valoChave, int (*comparar)(void*, void*)){
+
     if(raiz==NULL){
         return NULL;
     }
     else{
         int comparacao = comparar(valoChave, raiz->dado);
+        printf("Chgeou aqui: %i\n", comparacao);
         if(comparacao==0){
+
             if(raiz->esq==NULL && raiz->dir==NULL){
                 free(raiz);
                 arvore->quantidadeno--;

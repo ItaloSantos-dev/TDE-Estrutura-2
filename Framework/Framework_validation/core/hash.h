@@ -32,4 +32,6 @@ Hash* RealocarMemoria(Hash* tabelaHash);
 Hash* CopiarTabelaHash(Hash* hashAntiga, Hash* hashNova);
 double FatorDeCarga(Hash* tabelaHash);
 
+void RemoverHash(Hash* tabelaHash, void* chave, int(*FuncaoDeEspalhamento)(int, void*),int(*Comparar)(void*,void*));
+
 #endif // HASH_H_INCLUDED

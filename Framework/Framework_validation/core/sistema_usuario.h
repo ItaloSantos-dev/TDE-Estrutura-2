@@ -12,9 +12,11 @@ typedef struct sistemaUsuario {
     Lista* listaEncadeada;
 } SistemaUsuario;
 
+
+
 SistemaUsuario* IniciarSistemaUsuarios();
 
-int CadastrarUsuario(SistemaUsuario* sistemaIniciado);
+int CadastrarUsuario(SistemaUsuario* sistemaIniciado, User* novoUsuario);
 User* LoginUsuario (SistemaUsuario* sistemaIniciado, char* _email, char*_senha);
 User* CapturarDadosParaCadastro(SistemaUsuario* sistemaIniciado);
 

@@ -31,6 +31,10 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="core/admin.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="core/admin.h" />
 		<Unit filename="core/avl.c">
 			<Option compilerVar="CC" />
 		</Unit>

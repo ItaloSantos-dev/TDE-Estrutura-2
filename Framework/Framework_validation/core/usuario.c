@@ -7,6 +7,7 @@
 User* CriarUsuario(int _id, char* _nome, char* _sobrenome, char* _email, char* _senha){
     User* novoUsuario = malloc(sizeof(User));
     novoUsuario->id = _id;
+    novoUsuario->admin = 0;
     strcpy(novoUsuario->nome, _nome);
     strcpy(novoUsuario->sobrenome, _sobrenome);
     strcpy(novoUsuario->email, _email);
@@ -36,10 +37,10 @@ int CompararUsuarioPorId(void*_user1 , void*_user2){
 
 }
 
-int CompararUsuarioPorEmail(void* _user1, void* _user2){
-    User* u1 = (User*)_user1;
+int CompararUsuarioPorEmail(void* _email, void* _user2){
+    char* u1 = (char*)_email;
     User* u2 = (User*)_user2;
 
-    return strcmp(u1->email, u2->email);
+    return strcmp(u1, u2->email);
 
 }

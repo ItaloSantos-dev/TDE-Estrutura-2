@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "core/sistema_usuario.h"
+#include "core/admin.h"
 
 void AddUsuarios(SistemaUsuario* sistema){
     User* user1 = malloc(sizeof(User));
@@ -10,15 +11,17 @@ void AddUsuarios(SistemaUsuario* sistema){
     strcpy(user1->sobrenome, "Santos");
     strcpy(user1->email, "italo@.com");
     strcpy(user1->senha, "1131");
-    InserirUsuarioEstruturas(sistema,user1);
+    CadastrarUsuario(sistema, user1);
 
     User* user2 = malloc(sizeof(User));
-    user2->id = 1;
+    user2->id = 2;
     strcpy(user2->nome, "Clarice");
     strcpy(user2->sobrenome, "Freire");
     strcpy(user2->email, "clarice@.com");
     strcpy(user2->senha, "1131");
-    InserirUsuarioEstruturas(sistema,user2);
+    CadastrarUsuario(sistema,user2);
+
+    DeletarUsuario(sistema, user1->email);
 }
 
 
@@ -27,10 +30,16 @@ int main(){
     printf("Tamanho do hashvetor: %i\n", sistemaUsuarios->tabelaPorEmail->tamanhoVetorHash);
     printf("Quantidade de elementos: %i\n", sistemaUsuarios->tabelaPorEmail->quantidadeEntradaHash);
     printf("Fator de carga: %i\n", FatorDeCarga(sistemaUsuarios->tabelaPorEmail));
+    printf(" ---------------------------\n");
     AddUsuarios(sistemaUsuarios);
+    printf(" ---------------------------\n");
     printf("Tamanho do hashvetor: %i\n", sistemaUsuarios->tabelaPorEmail->tamanhoVetorHash);
     printf("Quantidade de elementos: %i\n", sistemaUsuarios->tabelaPorEmail->quantidadeEntradaHash);
     printf("Fator de carga: %f\n", FatorDeCarga(sistemaUsuarios->tabelaPorEmail));
+    printf(" ---------------------------\n");
+    ListarUsuarios(sistemaUsuarios);
+
+
 
 
 

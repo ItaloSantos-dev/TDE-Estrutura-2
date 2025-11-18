@@ -7,6 +7,7 @@ typedef struct usuario{
     char sobrenome[100];
     char email[100];
     char senha[50];
+    int admin;
 
 }User;
 

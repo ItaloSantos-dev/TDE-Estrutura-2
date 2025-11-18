@@ -123,6 +123,15 @@ Hash* RealocarMemoria(Hash* tabelaHash){
     }
 }
 
+void RemoverHash(Hash* tabelaHash, void* chave, int(*FuncaoDeEspalhamento)(int, void*),int(*Comparar)(void*,void*)){
+    EntradaHash* entradaBuscada = BuscarHash(tabelaHash, chave, FuncaoDeEspalhamento,Comparar);
+    int FE = FuncaoDeEspalhamento(tabelaHash->tamanhoVetorHash, chave);
+    if(entradaBuscada){
+        RemoverLista(tabelaHash->hashVetor[FE], entradaBuscada, CompararEntradaHashChave );
+        tabelaHash->quantidadeEntradaHash--;
+    }
+}
+
 
 
 

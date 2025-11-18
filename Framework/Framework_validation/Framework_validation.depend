@@ -1,11 +1,12 @@
 # depslib dependency file v1.0
-1763417859 source:e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\framework\framework_validation\main.c
+1763430145 source:e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\framework\framework_validation\main.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"core/sistema_usuario.h"
+	"core/admin.h"
 
-1763411323 source:e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\framework\framework_validation\core\avl.c
+1763429944 source:e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\framework\framework_validation\core\avl.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -14,7 +15,7 @@
 
 1763411325 e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\framework\framework_validation\core\avl.h
 
-1763417883 source:e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\framework\framework_validation\core\hash.c
+1763429608 source:e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\framework\framework_validation\core\hash.c
 	<stdlib.h>
 	<stdio.h>
 	<string.h>
@@ -39,26 +40,35 @@
 	<string.h>
 	"util.h"
 
-1763417764 e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\framework\framework_validation\core\hash.h
+1763429353 e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\framework\framework_validation\core\hash.h
 	"listaEncadeada.h"
 
-1763382363 source:e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\framework\framework_validation\core\usuario.c
+1763430118 source:e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\framework\framework_validation\core\usuario.c
 	<stdlib.h>
 	<stdio.h>
 	<string.h>
 	"usuario.h"
 
-1763382811 e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\framework\framework_validation\core\usuario.h
+1763428065 e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\framework\framework_validation\core\usuario.h
 
-1763417837 source:e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\framework\framework_validation\core\sistema_usuario.c
+1763425005 source:e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\framework\framework_validation\core\sistema_usuario.c
 	<stdlib.h>
 	<stdio.h>
 	<string.h>
 	"sistema_usuario.h"
 
-1763417802 e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\framework\framework_validation\core\sistema_usuario.h
+1763428065 e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\framework\framework_validation\core\sistema_usuario.h
 	"avl.h"
 	"util.h"
 	"hash.h"
 	"usuario.h"
+
+1763430061 source:e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\framework\framework_validation\core\admin.c
+	<stdlib.h>
+	<stdio.h>
+	<string.h>
+	"admin.h"
+
+1763431283 e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\framework\framework_validation\core\admin.h
+	"sistema_usuario.h"
 
