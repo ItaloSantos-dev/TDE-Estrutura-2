@@ -4,6 +4,7 @@
 #include "util.h"
 #include "hash.h"
 #include "usuario.h"
+#include "erros.h"
 
 
 typedef struct sistemaUsuario {
@@ -14,16 +15,16 @@ typedef struct sistemaUsuario {
 
 
 
-SistemaUsuario* IniciarSistemaUsuarios();
+CodigoErro IniciarSistemaUsuarios(SistemaUsuario** sistema);
 
-int CadastrarUsuario(SistemaUsuario* sistemaIniciado, User* novoUsuario);
-User* LoginUsuario (SistemaUsuario* sistemaIniciado, char* _email, char*_senha);
+CodigoErro CadastrarUsuario(SistemaUsuario* sistemaIniciado, User* novoUsuario);
+CodigoErro LoginUsuario (SistemaUsuario* sistemaIniciado, char* _email, char*_senha, User** usuarioLogado);
 User* CapturarDadosParaCadastro(SistemaUsuario* sistemaIniciado);
 
-int InserirUsuarioEstruturas(SistemaUsuario* sistemaIniciado, User* novoUsuario);
+CodigoErro InserirUsuarioEstruturas(SistemaUsuario* sistemaIniciado, User* novoUsuario);
 
 
-int ValidarNovoemail(Hash* tabelaHash, User* novousuario);
+CodigoErro ValidarNovoemail(Hash* tabelaHash, User* novousuario);
 int ValidarStringEmail(char* _email);
 void ImprimirUsuarioEntradaHash(void* dado);
 int ConfirmarSenha(char* _senha, User* usuarioBuscado);

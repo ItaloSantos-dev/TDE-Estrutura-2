@@ -4,46 +4,50 @@
 #include"avl.h"
 #include"util.h"
 
-AVL* IniciarAvl(){
+
+AVL* IniciarAvl(CodigoErro* erro){
     AVL* arvore = malloc(sizeof(AVL));
+    if(!arvore){
+        if(erro)*erro = ERRO_AVL_MEMORIA;
+        return NULL;
+    }
     arvore->raiz=NULL;
     arvore->quantidadeno=0;
+    if(erro)*erro = ERRO_OK;
     return arvore;
 }
 
-NoAvl* CriarNovoNoAvl(void* _dado){
+NoAvl* CriarNovoNoAvl(void* _dado, CodigoErro* erro){
     NoAvl* novoNoAVL = malloc(sizeof(NoAvl));
-    if(novoNoAVL==NULL){
-        printf("Erro ao alocar memoria\n");
+    if(!novoNoAVL){
+        if(erro)*erro = ERRO_AVL_MEMORIA;
         return NULL;
     }
-    else{
-        novoNoAVL->dado = _dado;
-        novoNoAVL->esq = NULL;
-        novoNoAVL->dir =NULL;
-        novoNoAVL->altura = 0;
-        return novoNoAVL;
-    }
+    novoNoAVL->dado = _dado;
+    novoNoAVL->esq = NULL;
+    novoNoAVL->dir =NULL;
+    novoNoAVL->altura = 0;
+    if(erro)*erro = ERRO_OK;
+    return novoNoAVL;
+
 
 }
 
 
-
-
-NoAvl* InserirAvl(AVL* arvore, NoAvl* raiz, void* novoDado, int (*comparar)(void*, void*)){
+NoAvl* InserirAvl(AVL* arvore, NoAvl* raiz, void* novoDado, int (*comparar)(void*, void*), CodigoErro* erro){
     if(raiz==NULL){
         arvore->quantidadeno++;
-        return CriarNovoNoAvl(novoDado);
+        return CriarNovoNoAvl(novoDado, erro);
 
     }
     else{
         int comparacao = comparar(novoDado, raiz->dado);
 
         if(comparacao<0){
-            raiz->esq = InserirAvl(arvore, raiz->esq, novoDado, comparar);
+            raiz->esq = InserirAvl(arvore, raiz->esq, novoDado, comparar, erro);
         }
         else{
-            raiz->dir = InserirAvl(arvore, raiz->dir, novoDado, comparar);
+            raiz->dir = InserirAvl(arvore, raiz->dir, novoDado, comparar, erro);
         }
     }
 
@@ -53,20 +57,22 @@ NoAvl* InserirAvl(AVL* arvore, NoAvl* raiz, void* novoDado, int (*comparar)(void
 
 }
 
-NoAvl* BuscarAvl (NoAvl* raiz, void* valoChave, int (*comparar)(void*, void*)){
+NoAvl* BuscarAvl (NoAvl* raiz, void* valoChave, int (*comparar)(void*, void*), CodigoErro* erro){
     if(raiz==NULL){
+        if(erro)*erro = ERRO_AVL_NO_NAO_ENCONTRADO;
         return NULL;
     }
     else{
         int comparacao =  comparar(valoChave, raiz->dado);
         if(comparacao==0){
+            if(erro)*erro = ERRO_OK;
             return raiz;
         }
         else if(comparacao<0){
-            return BuscarAvl(raiz->esq, valoChave, comparar);
+            return BuscarAvl(raiz->esq, valoChave, comparar, erro);
         }
         else{
-            return BuscarAvl(raiz->dir, valoChave, comparar);
+            return BuscarAvl(raiz->dir, valoChave, comparar, erro);
         }
 
     }
@@ -74,19 +80,21 @@ NoAvl* BuscarAvl (NoAvl* raiz, void* valoChave, int (*comparar)(void*, void*)){
 }
 
 
-NoAvl* RemoverNoAvl(AVL* arvore, NoAvl* raiz, void* valoChave, int (*comparar)(void*, void*)){
+NoAvl* RemoverNoAvl(AVL* arvore, NoAvl* raiz, void* valoChave, int (*comparar)(void*, void*), CodigoErro* erro){
 
     if(raiz==NULL){
+        if(erro)*erro = ERRO_AVL_NO_NAO_ENCONTRADO;
         return NULL;
     }
     else{
         int comparacao = comparar(valoChave, raiz->dado);
-        printf("Chgeou aqui: %i\n", comparacao);
+
         if(comparacao==0){
 
             if(raiz->esq==NULL && raiz->dir==NULL){
                 free(raiz);
                 arvore->quantidadeno--;
+                if(erro)*erro = ERRO_OK;
                 return NULL;
             }
             else{
@@ -96,7 +104,7 @@ NoAvl* RemoverNoAvl(AVL* arvore, NoAvl* raiz, void* valoChave, int (*comparar)(v
                         aux = aux->dir;
                     }
                     raiz->dado=aux->dado;
-                    raiz->esq = RemoverNoAvl(arvore, raiz->esq, aux->dado, comparar);
+                    raiz->esq = RemoverNoAvl(arvore, raiz->esq, aux->dado, comparar, erro);
                     return raiz;
 
                 }
@@ -110,15 +118,16 @@ NoAvl* RemoverNoAvl(AVL* arvore, NoAvl* raiz, void* valoChave, int (*comparar)(v
                     }
                     free(raiz);
                     arvore->quantidadeno--;
+                    if(erro)*erro = ERRO_OK;
                     return substituto;
                 }
             }
         }
         else if(comparacao<0){
-            raiz->esq = RemoverNoAvl(arvore, raiz->esq, valoChave, comparar);
+            raiz->esq = RemoverNoAvl(arvore, raiz->esq, valoChave, comparar, erro);
         }
         else{
-            raiz->dir = RemoverNoAvl(arvore, raiz->dir, valoChave, comparar);
+            raiz->dir = RemoverNoAvl(arvore, raiz->dir, valoChave, comparar,erro);
         }
     }
     raiz->altura = Maior(AlturaDoNo(raiz->esq), AlturaDoNo(raiz->dir))+1;
@@ -228,6 +237,28 @@ void ImprimirAvl(NoAvl* raiz, void(*ExibirDados)(void*)){
         ImprimirAvl(raiz->dir, ExibirDados);
     }
 
+}
+
+void LiberarAvl(AVL* arvore){
+    if(arvore->raiz==NULL){
+        free(arvore->raiz);
+        free(arvore);
+        return;
+    }
+    else{
+       LiberarNosAvl(arvore->raiz);
+    }
+}
+
+void LiberarNosAvl(NoAvl* raiz){
+    free(raiz->dado);
+    if(raiz->esq!=NULL){
+        LiberarNosAvl(raiz->esq);
+    }
+    if(raiz->dir!=NULL){
+        LiberarNosAvl(raiz->dir);
+    }
+    free(raiz);
 }
 
 

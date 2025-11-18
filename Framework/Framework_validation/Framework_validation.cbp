@@ -39,6 +39,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="core/avl.h" />
+		<Unit filename="core/erros.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="core/erros.h" />
 		<Unit filename="core/hash.c">
 			<Option compilerVar="CC" />
 		</Unit>

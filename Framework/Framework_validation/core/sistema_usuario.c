@@ -5,23 +5,43 @@
 
 
 
-SistemaUsuario* IniciarSistemaUsuarios(){
-    SistemaUsuario* novoSistemaUsuarios = malloc(sizeof(SistemaUsuario));
-    novoSistemaUsuarios->arvoreUsuarios = IniciarAvl();
-    novoSistemaUsuarios->tabelaPorEmail = CriarNovaHash(2);
-    novoSistemaUsuarios->listaEncadeada = CriarNovaLista();
-    return novoSistemaUsuarios;
+CodigoErro IniciarSistemaUsuarios(SistemaUsuario** sistema){
+    if(!sistema) return ERRO_PARAMETRO_INVALIDO;
+
+    SistemaUsuario* novoSistema = malloc(sizeof(SistemaUsuario));
+
+    if(!novoSistema) return ERRO_MEMORIA;
+
+    CodigoErro erro = ERRO_OK;
+    novoSistema->arvoreUsuarios = IniciarAvl(&erro);
+
+    if(!novoSistema->arvoreUsuarios){
+        free(novoSistema);
+        return erro;
+    }
+
+    novoSistema->tabelaPorEmail=CriarNovaHash(5, &erro);
+    if(!novoSistema->tabelaPorEmail){
+        LiberarAvl(novoSistema->arvoreUsuarios);
+        free(novoSistema);
+        return erro;
+    }
+
+    novoSistema->listaEncadeada=CriarNovaLista(&erro);
+    if(!novoSistema->listaEncadeada){
+        LiberarAvl(novoSistema->arvoreUsuarios);
+        LiberarHash(novoSistema->tabelaPorEmail);
+        free(novoSistema);
+        return erro;
+    }
+    *sistema = novoSistema;
+    return ERRO_OK;
 
 }
-int ValidarNovoemail(Hash* tabelaHash, User* novousuario){
-    EntradaHash* entradaBuscada = BuscarHash(tabelaHash, novousuario->email, FuncaoDeEspalhamentoString, CompararEntradaHashChave);
-    if(entradaBuscada){
-        //Se achou retorna 0 para parar o cadastro
-        return 0;
-    }
-    else{
-        return 1;
-    }
+CodigoErro ValidarNovoemail(Hash* tabelaHash, User* novousuario){
+    CodigoErro erro=ERRO_OK;
+    EntradaHash* entradaBuscada = BuscarHash(tabelaHash, novousuario->email, FuncaoDeEspalhamentoString, CompararEntradaHashChave, &erro);
+    return erro;
 }
 
 int ValidarStringEmail(char* _email){
@@ -33,29 +53,36 @@ int ValidarStringEmail(char* _email){
     }
 }
 
-int InserirUsuarioEstruturas(SistemaUsuario* sistemaIniciado, User* novoUsuario){
-    if(ValidarNovoemail(sistemaIniciado->tabelaPorEmail, novoUsuario) && ValidarStringEmail(novoUsuario->email)){
-        sistemaIniciado->arvoreUsuarios->raiz = InserirAvl(sistemaIniciado->arvoreUsuarios, sistemaIniciado->arvoreUsuarios->raiz, novoUsuario, CompararUsuarioPorEmail);
-        sistemaIniciado->tabelaPorEmail = InserirHash(sistemaIniciado->tabelaPorEmail, novoUsuario->email, novoUsuario, FuncaoDeEspalhamentoString, ExibirDadosString, ImprimirUsuario);
-        return 1;
-    }
-    else{
-        return 0;
-    }
+CodigoErro InserirUsuarioEstruturas(SistemaUsuario* sistemaIniciado, User* novoUsuario){
 
+    if(ValidarNovoemail(sistemaIniciado->tabelaPorEmail, novoUsuario)==ERRO_LISTA_NO_NAO_ENCONTRADO && ValidarStringEmail(novoUsuario->email)){
+
+        CodigoErro erroHash = ERRO_OK;
+
+        sistemaIniciado->tabelaPorEmail = InserirHash(sistemaIniciado->tabelaPorEmail, novoUsuario->email, novoUsuario, FuncaoDeEspalhamentoString, ExibirDadosString, ImprimirUsuario, &erroHash);
+        if(erroHash!=ERRO_OK){
+            return erroHash;
+        }
+
+
+         CodigoErro erroAvl = ERRO_OK;
+
+         sistemaIniciado->arvoreUsuarios->raiz = InserirAvl(sistemaIniciado->arvoreUsuarios, sistemaIniciado->arvoreUsuarios->raiz, novoUsuario, CompararUsuarioPorEmail, &erroAvl);
+        if(erroAvl!= ERRO_OK){
+            return erroAvl;
+        }
+        return ERRO_OK;
+
+    }
 }
 
-int CadastrarUsuario(SistemaUsuario* sistemaIniciado, User* novoUsuario){
+CodigoErro CadastrarUsuario(SistemaUsuario* sistemaIniciado, User* novoUsuario){
+
     if(!sistemaIniciado){
-        return 0;
+        return ERRO_SISTEMA_NAO_INICIADO;
     }
     else{
-        if(InserirUsuarioEstruturas(sistemaIniciado, novoUsuario)){
-            return 1;
-        }
-        else{
-            return 0;
-        }
+        return InserirUsuarioEstruturas(sistemaIniciado, novoUsuario);
     }
 
 }
@@ -96,13 +123,17 @@ int ConfirmarSenha(char* _senha, User* usuarioBuscado){
     return strcmp(_senha, usuarioBuscado->senha)==0;
 }
 
-User* LoginUsuario (SistemaUsuario* sistemaIniciado, char* _email, char*_senha){
-    EntradaHash* entradaBuscada = BuscarHash(sistemaIniciado->tabelaPorEmail, _email, FuncaoDeEspalhamentoString, CompararUsuarioPorEmail );
-    if(entradaBuscada && ConfirmarSenha(_senha, entradaBuscada->valor)){
-        return entradaBuscada->valor;
+CodigoErro LoginUsuario (SistemaUsuario* sistemaIniciado, char* _email, char*_senha, User** usuarioLogado){
+
+    CodigoErro erroBusca;
+    EntradaHash* entradaBuscada = BuscarHash(sistemaIniciado->tabelaPorEmail, _email, FuncaoDeEspalhamentoString, CompararUsuarioPorEmail, &erroBusca);
+
+    if(erroBusca==ERRO_OK && ConfirmarSenha(_senha, entradaBuscada->valor)){
+        *usuarioLogado =  entradaBuscada->valor;
+        return ERRO_LOGIN_SUCESSO;
     }
     else{
-        return NULL;
+        return ERRO_LOGIN_FALHOU;
     }
 
 }
