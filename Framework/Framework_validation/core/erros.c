@@ -38,6 +38,10 @@ const char* CodigoErroParaTexto(CodigoErro erro) {
 
         case ERRO_LOGIN_SUCESSO: return "Login realizado com sucesso";
         case ERRO_LOGIN_FALHOU: return "Login falhou";
+        case ERRO_DADO_JA_EXISTENTE: return "Dado ja existente na AVL";
+        case EMAIL_JA_EXISTENTE: return "Email ja cadastrado";
+        case ERRO_LOGIN_SENHA_INVALIDA: return "Senha invalida";
+        case ERRO_LOGIN_EMAIL_NAO_ENCONTRADO: return "Email nao cadastrado";
 
         default: return "Erro não mapeado";
     }

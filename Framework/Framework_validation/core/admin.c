@@ -3,19 +3,19 @@
 #include<string.h>
 #include "admin.h"
 
-void ListarUsuarios (SistemaUsuario* sistemaIniciado){
-    ImprimirAvl(sistemaIniciado->arvoreUsuarios->raiz, ImprimirUsuario);
+void ListarUsuarios (SistemaUsuario* sistemaIniciado, void(*ExibirDados)(void* dado)){
+    ImprimirAvl(sistemaIniciado->arvoreUsuarios->raiz, ExibirDados );
 }
 
-CodigoErro admin_CriarUsuario(SistemaUsuario* sistemaIniciado){
-    User* novoUser = CapturarDadosParaCadastro(sistemaIniciado);
+CodigoErro admin_CriarUsuario(SistemaUsuario* sistemaIniciado, User*(*CapturarDados)(void* id)){
+    User* novoUser = CapturarDados(sistemaIniciado);
     return CadastrarUsuario(sistemaIniciado, novoUser);
 }
 
 CodigoErro DeletarUsuario(SistemaUsuario* sistemaIniciado, char* _email){
 
     CodigoErro erroHash= ERRO_OK;
-    RemoverHash(sistemaIniciado->tabelaPorEmail, _email, FuncaoDeEspalhamentoString, CompararString, &erroHash);
+    RemoverHash(sistemaIniciado->tabelaPorEmail, _email, FuncaoDeEspalhamentoString, CompararEntradaHashChave, &erroHash);
 
     if(erroHash!=ERRO_OK){
         return erroHash;
@@ -39,6 +39,7 @@ CodigoErro EditarUsuario(SistemaUsuario* sistemaInicado, char* _email, char* nov
     }
     User* usuariouscado =(User*) entradaHashBuscada->valor;
     EditarDadosUsuario(usuariouscado, novoNome, novoSobrenome, novaSenha);
+    return erroBuscaHash;
 
 }
 void  EditarDadosUsuario(User* usuariouscado, char* novoNome, char* novoSobrenome, char* novaSenha){

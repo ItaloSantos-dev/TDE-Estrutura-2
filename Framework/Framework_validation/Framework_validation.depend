@@ -1,12 +1,12 @@
 # depslib dependency file v1.0
-1763502364 source:e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\framework\framework_validation\main.c
+1763518296 source:e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\framework\framework_validation\main.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"core/sistema_usuario.h"
 	"core/admin.h"
 
-1763500356 source:e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\framework\framework_validation\core\avl.c
+1763507641 source:e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\framework\framework_validation\core\avl.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -16,7 +16,7 @@
 1763500356 e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\framework\framework_validation\core\avl.h
 	"erros.h"
 
-1763501563 source:e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\framework\framework_validation\core\hash.c
+1763517041 source:e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\framework\framework_validation\core\hash.c
 	<stdlib.h>
 	<stdio.h>
 	<string.h>
@@ -24,10 +24,10 @@
 	"util.h"
 	"listaEncadeada.h"
 
-1763501625 e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\framework\framework_validation\core\listaencadeada.h
+1763504954 e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\framework\framework_validation\core\listaencadeada.h
 	"erros.h"
 
-1763500299 source:e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\framework\framework_validation\core\listaencadeada.c
+1763505633 source:e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\framework\framework_validation\core\listaencadeada.c
 	<stdlib.h>
 	<stdio.h>
 	<string.h>
@@ -54,33 +54,33 @@
 
 1763428065 e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\framework\framework_validation\core\usuario.h
 
-1763502719 source:e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\framework\framework_validation\core\sistema_usuario.c
+1763518266 source:e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\framework\framework_validation\core\sistema_usuario.c
 	<stdlib.h>
 	<stdio.h>
 	<string.h>
 	"sistema_usuario.h"
 
-1763502020 e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\framework\framework_validation\core\sistema_usuario.h
+1763518266 e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\framework\framework_validation\core\sistema_usuario.h
 	"avl.h"
 	"util.h"
 	"hash.h"
 	"usuario.h"
 	"erros.h"
 
-1763501604 source:e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\framework\framework_validation\core\admin.c
+1763517696 source:e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\framework\framework_validation\core\admin.c
 	<stdlib.h>
 	<stdio.h>
 	<string.h>
 	"admin.h"
 
-1763501550 e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\framework\framework_validation\core\admin.h
+1763517666 e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\framework\framework_validation\core\admin.h
 	"sistema_usuario.h"
 
-1763502399 source:e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\framework\framework_validation\core\erros.c
+1763518266 source:e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\framework\framework_validation\core\erros.c
 	<stdlib.h>
 	<stdio.h>
 	<string.h>
 	"erros.h"
 
-1763502364 e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\framework\framework_validation\core\erros.h
+1763518271 e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\framework\framework_validation\core\erros.h
 

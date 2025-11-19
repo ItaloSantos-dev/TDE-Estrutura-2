@@ -86,6 +86,7 @@ EntradaHash* BuscarHash(Hash* tabelaHash, void* chave, int(*FuncaoDeEspalhamento
         return entradaBuscada;
     }
     else {
+
         return NULL;
     }
 }
@@ -109,7 +110,6 @@ Hash* CopiarTabelaHash(Hash* hashAntiga, Hash* hashNova, CodigoErro* erro){
 
 Hash* RealocarMemoria(Hash* tabelaHash, CodigoErro* erro){
     double FC = FatorDeCarga(tabelaHash);
-    printf("FC: %f\n", FC);
     if(FC>0.6){
         Hash* novaTabelaHash = CriarNovaHash(tabelaHash->tamanhoVetorHash*2, erro);
         novaTabelaHash = CopiarTabelaHash(tabelaHash, novaTabelaHash, erro);
@@ -121,10 +121,12 @@ Hash* RealocarMemoria(Hash* tabelaHash, CodigoErro* erro){
 }
 
 void RemoverHash(Hash* tabelaHash, void* chave, int(*FuncaoDeEspalhamento)(int, void*),int(*Comparar)(void*,void*), CodigoErro* erro){
+
     EntradaHash* entradaBuscada = BuscarHash(tabelaHash, chave, FuncaoDeEspalhamento,Comparar, erro);
+
     int FE = FuncaoDeEspalhamento(tabelaHash->tamanhoVetorHash, chave);
     if(entradaBuscada){
-        RemoverLista(tabelaHash->hashVetor[FE], entradaBuscada, CompararEntradaHashChave, erro );
+        RemoverLista(tabelaHash->hashVetor[FE], chave, CompararEntradaHashChave, erro );
         tabelaHash->quantidadeEntradaHash--;
     }
 }
@@ -135,6 +137,12 @@ void LiberarHash(Hash* tabelaHash){
     }
     free(tabelaHash);
 
+}
+
+void ImprimirEntradaHash(void* dado){
+    EntradaHash* entrada = (EntradaHash*)dado;
+    entrada->ImprimirChave(entrada->chave);
+    entrada->ImprimirValor(entrada->valor);
 }
 
 

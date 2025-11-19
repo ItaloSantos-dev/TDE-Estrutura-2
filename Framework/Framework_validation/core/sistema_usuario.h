@@ -19,7 +19,8 @@ CodigoErro IniciarSistemaUsuarios(SistemaUsuario** sistema);
 
 CodigoErro CadastrarUsuario(SistemaUsuario* sistemaIniciado, User* novoUsuario);
 CodigoErro LoginUsuario (SistemaUsuario* sistemaIniciado, char* _email, char*_senha, User** usuarioLogado);
-User* CapturarDadosParaCadastro(SistemaUsuario* sistemaIniciado);
+
+User* CapturarDadosParaCadastroConsole(void* sistema);
 
 CodigoErro InserirUsuarioEstruturas(SistemaUsuario* sistemaIniciado, User* novoUsuario);
 

@@ -54,8 +54,12 @@ int ValidarStringEmail(char* _email){
 }
 
 CodigoErro InserirUsuarioEstruturas(SistemaUsuario* sistemaIniciado, User* novoUsuario){
+    CodigoErro erroValidacaoEmail = ValidarNovoemail(sistemaIniciado->tabelaPorEmail, novoUsuario);
+    if(erroValidacaoEmail==ERRO_OK){
+        return EMAIL_JA_EXISTENTE;
+    }
 
-    if(ValidarNovoemail(sistemaIniciado->tabelaPorEmail, novoUsuario)==ERRO_LISTA_NO_NAO_ENCONTRADO && ValidarStringEmail(novoUsuario->email)){
+    if(erroValidacaoEmail==ERRO_LISTA_NO_NAO_ENCONTRADO && ValidarStringEmail(novoUsuario->email)){
 
         CodigoErro erroHash = ERRO_OK;
 
@@ -87,7 +91,8 @@ CodigoErro CadastrarUsuario(SistemaUsuario* sistemaIniciado, User* novoUsuario){
 
 }
 
-User* CapturarDadosParaCadastro(SistemaUsuario* sistemaIniciado){
+User* CapturarDadosParaCadastroConsole(void* sistema){
+    SistemaUsuario* sistemaIniciado = (SistemaUsuario*) sistema;
     int id = sistemaIniciado->arvoreUsuarios->quantidadeno +1;
     char nome[100];
     char sobrenome[100];
@@ -127,14 +132,16 @@ CodigoErro LoginUsuario (SistemaUsuario* sistemaIniciado, char* _email, char*_se
 
     CodigoErro erroBusca;
     EntradaHash* entradaBuscada = BuscarHash(sistemaIniciado->tabelaPorEmail, _email, FuncaoDeEspalhamentoString, CompararUsuarioPorEmail, &erroBusca);
+    if(erroBusca!=ERRO_OK){
+        return ERRO_LOGIN_EMAIL_NAO_ENCONTRADO;
+    }
+    if(ConfirmarSenha(_senha, entradaBuscada->valor)!=0){
+        return ERRO_LOGIN_SENHA_INVALIDA;
+    }
+    *usuarioLogado = entradaBuscada->valor;
+    return ERRO_LOGIN_SUCESSO;
 
-    if(erroBusca==ERRO_OK && ConfirmarSenha(_senha, entradaBuscada->valor)){
-        *usuarioLogado =  entradaBuscada->valor;
-        return ERRO_LOGIN_SUCESSO;
-    }
-    else{
-        return ERRO_LOGIN_FALHOU;
-    }
+
 
 }
 

@@ -46,7 +46,6 @@ void InserirLista(Lista* lista, void* dado, CodigoErro* erro){
 void RemoverLista(Lista* lista, void*dado, int(*Comparar)(void*, void*), CodigoErro* erro){
     NoLista* atual = lista->cabeca->prox;
     NoLista* antecessor = lista->cabeca;
-
     while(atual!=NULL && Comparar(dado, atual->dado)!=0){
         antecessor = atual;
         atual = atual->prox;

@@ -42,6 +42,10 @@ NoAvl* InserirAvl(AVL* arvore, NoAvl* raiz, void* novoDado, int (*comparar)(void
     }
     else{
         int comparacao = comparar(novoDado, raiz->dado);
+        if(comparacao==0){
+            if(erro) *erro = ERRO_DADO_JA_EXISTENTE;
+            return raiz;
+        }
 
         if(comparacao<0){
             raiz->esq = InserirAvl(arvore, raiz->esq, novoDado, comparar, erro);

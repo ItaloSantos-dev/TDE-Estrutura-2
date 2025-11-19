@@ -25,6 +25,10 @@ void ImprimirLista(Lista* lista, void(*ExibirDados)(void*));
 
 void LiberarLista(Lista* lista);
 
+void ImprimirEntradaHash(void* dado);
+
+
+
 
 
 
