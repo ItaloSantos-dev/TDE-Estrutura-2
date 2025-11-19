@@ -42,6 +42,6 @@ Hash* CopiarTabelaHash(Hash* hashAntiga, Hash* hashNova,CodigoErro* erro);
 double FatorDeCarga(Hash* tabelaHash);
 
 void RemoverHash(Hash* tabelaHash, void* chave, int(*FuncaoDeEspalhamento)(int, void*),int(*Comparar)(void*,void*),CodigoErro* erro);
-void LiberarHash(Hash* tabelaHash);
+Hash* LiberarHash(Hash* tabelaHash);
 
 #endif // HASH_H_INCLUDED

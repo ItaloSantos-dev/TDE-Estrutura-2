@@ -11,7 +11,7 @@ typedef struct noavl{
 
 typedef struct avl{
     NoAvl* raiz;
-    int quantidadeno
+    int quantidadeno;
 }AVL;
 AVL* IniciarAvl(CodigoErro* erro);
 NoAvl* CriarNovoNoAvl(void* dado, CodigoErro* erro);
@@ -34,11 +34,11 @@ NoAvl* Balancear(NoAvl* raiz);
 
 void ImprimirAvl(NoAvl* raiz, void(*ExibirDados)(void*));
 
-void LiberarAvl(AVL* arvore);
+AVL* LiberarAvl(AVL* arvore);
 
 void LiberarNosAvl(NoAvl* raiz);
 
-//Funções utilitárias
+//Fun  es utilit rias
 
 
 

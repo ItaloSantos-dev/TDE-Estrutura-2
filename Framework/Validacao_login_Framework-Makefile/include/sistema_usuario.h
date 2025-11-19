@@ -30,6 +30,16 @@ int ValidarStringEmail(char* _email);
 void ImprimirUsuarioEntradaHash(void* dado);
 int ConfirmarSenha(char* _senha, User* usuarioBuscado);
 
+CodigoErro EncerrarSistema(SistemaUsuario** sistema);
+
+void LiberarUsuariosAVL(NoAvl* raiz, CodigoErro* erro);
+
+void LiberarUsuariosHash(Hash* tabelaHash, CodigoErro* erro);
+
+CodigoErro LiberarUsuarios(SistemaUsuario* sistema);
+
+
+
 
 
 #endif // SISTEMA_USUARIO_H_INCLUDED

@@ -243,25 +243,19 @@ void ImprimirAvl(NoAvl* raiz, void(*ExibirDados)(void*)){
 
 }
 
-void LiberarAvl(AVL* arvore){
-    if(arvore->raiz==NULL){
-        free(arvore->raiz);
-        free(arvore);
-        return;
-    }
-    else{
-       LiberarNosAvl(arvore->raiz);
-    }
+AVL* LiberarAvl(AVL* arvore){
+    if(arvore==NULL)return NULL;
+
+    LiberarNosAvl(arvore->raiz);
+    free(arvore);
+    return NULL;
 }
 
 void LiberarNosAvl(NoAvl* raiz){
-    free(raiz->dado);
-    if(raiz->esq!=NULL){
-        LiberarNosAvl(raiz->esq);
-    }
-    if(raiz->dir!=NULL){
-        LiberarNosAvl(raiz->dir);
-    }
+    if(raiz==NULL) return;
+
+    LiberarNosAvl(raiz->esq);
+    LiberarNosAvl(raiz->dir);
     free(raiz);
 }
 

@@ -86,19 +86,20 @@ void ImprimirLista(Lista* lista, void(*ExibirDados)(void*)){
     }
 }
 
-void LiberarLista(Lista* lista){
-    if(!lista) return;
+Lista* LiberarLista(Lista* lista){
+    if(!lista) return NULL;
 
     NoLista* atual = lista->cabeca;
     while(atual != NULL){
         NoLista* aux = atual;
         atual = atual->prox;
 
-        if(aux->dado) free(aux->dado);
+        // remove o free(aux->dado);
         free(aux);
     }
 
     free(lista);
+    return NULL;
 }
 
 

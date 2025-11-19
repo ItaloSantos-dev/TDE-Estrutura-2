@@ -80,6 +80,7 @@ int CompararEntradaHashChave(void* _chave, void* _entradaHash){
 
 EntradaHash* BuscarHash(Hash* tabelaHash, void* chave, int(*FuncaoDeEspalhamento)(int,void*), int(*Comparar)(void*,void*), CodigoErro* erro ){
     int posicao = FuncaoDeEspalhamento(tabelaHash->tamanhoVetorHash, chave);
+
     EntradaHash* entradaBuscada=BuscarLista(tabelaHash->hashVetor[posicao], chave, CompararEntradaHashChave, RetornarEntradaHash, erro);
 
     if(entradaBuscada){
@@ -131,11 +132,14 @@ void RemoverHash(Hash* tabelaHash, void* chave, int(*FuncaoDeEspalhamento)(int, 
     }
 }
 
-void LiberarHash(Hash* tabelaHash){
+Hash* LiberarHash(Hash* tabelaHash){
+    if(tabelaHash==NULL) return NULL;
+
     for(int i=0; i<tabelaHash->tamanhoVetorHash; i++){
-        LiberarLista(tabelaHash->hashVetor[i]);
+        tabelaHash->hashVetor[i]=LiberarLista(tabelaHash->hashVetor[i]);
     }
     free(tabelaHash);
+    return NULL;
 
 }
 

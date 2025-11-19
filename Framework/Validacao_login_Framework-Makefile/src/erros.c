@@ -42,6 +42,10 @@ const char* CodigoErroParaTexto(CodigoErro erro) {
         case EMAIL_JA_EXISTENTE: return "Email ja cadastrado";
         case ERRO_LOGIN_SENHA_INVALIDA: return "Senha invalida";
         case ERRO_LOGIN_EMAIL_NAO_ENCONTRADO: return "Email nao cadastrado";
+        case ERRO_LIBERAR_AVL: return "Falha ao liberara AVL";
+        case ERRO_LIBERAR_HASH: return "Falha ao liberara HASH";
+        case ERRO_USUARIO_NAO_REMOVIDO: return "Falha ao liberar User* das estruturas";
+        case ERRO_EMAIL_INVALIDO: return "Email invalido";
 
         default: return "Erro não mapeado";
     }

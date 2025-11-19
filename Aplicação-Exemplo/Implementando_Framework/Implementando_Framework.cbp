@@ -30,7 +30,12 @@
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
+			<Add directory="../../Framework/Validacao_login_Framework-Makefile/include" />
 		</Compiler>
+		<Linker>
+			<Add library="../../Framework/Validacao_login_Framework-Makefile/build/libmeuframework.a" />
+			<Add directory="../../Framework/Validacao_login_Framework-Makefile/build" />
+		</Linker>
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>

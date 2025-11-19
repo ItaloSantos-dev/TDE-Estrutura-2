@@ -23,7 +23,7 @@ void* BuscarLista(Lista* lista, void*dado, int(*Comparar)(void*, void*), void*(*
 
 void ImprimirLista(Lista* lista, void(*ExibirDados)(void*));
 
-void LiberarLista(Lista* lista);
+Lista* LiberarLista(Lista* lista);
 
 void ImprimirEntradaHash(void* dado);
 

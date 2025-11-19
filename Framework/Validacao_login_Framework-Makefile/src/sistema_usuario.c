@@ -22,14 +22,14 @@ CodigoErro IniciarSistemaUsuarios(SistemaUsuario** sistema){
 
     novoSistema->tabelaPorEmail=CriarNovaHash(5, &erro);
     if(!novoSistema->tabelaPorEmail){
-        LiberarAvl(novoSistema->arvoreUsuarios);
+        novoSistema->arvoreUsuarios = LiberarAvl(novoSistema->arvoreUsuarios);
         free(novoSistema);
         return erro;
     }
 
     novoSistema->listaEncadeada=CriarNovaLista(&erro);
     if(!novoSistema->listaEncadeada){
-        LiberarAvl(novoSistema->arvoreUsuarios);
+        novoSistema->arvoreUsuarios = LiberarAvl(novoSistema->arvoreUsuarios);
         LiberarHash(novoSistema->tabelaPorEmail);
         free(novoSistema);
         return erro;
@@ -58,8 +58,11 @@ CodigoErro InserirUsuarioEstruturas(SistemaUsuario* sistemaIniciado, User* novoU
     if(erroValidacaoEmail==ERRO_OK){
         return EMAIL_JA_EXISTENTE;
     }
+    if(ValidarStringEmail(novoUsuario->email)==0){
+        return ERRO_EMAIL_INVALIDO;
+    }
 
-    if(erroValidacaoEmail==ERRO_LISTA_NO_NAO_ENCONTRADO && ValidarStringEmail(novoUsuario->email)){
+    if(erroValidacaoEmail==ERRO_LISTA_NO_NAO_ENCONTRADO){
 
         CodigoErro erroHash = ERRO_OK;
 
@@ -126,12 +129,12 @@ void ImprimirUsuarioEntradaHash(void* dado){
     ImprimirUsuario(entradaHash->valor);
 }
 int ConfirmarSenha(char* _senha, User* usuarioBuscado){
-    return strcmp(_senha, usuarioBuscado->senha)==0;
+    return strcmp(_senha, usuarioBuscado->senha);
 }
 
 CodigoErro LoginUsuario (SistemaUsuario* sistemaIniciado, char* _email, char*_senha, User** usuarioLogado){
 
-    CodigoErro erroBusca;
+    CodigoErro erroBusca=ERRO_OK;
     EntradaHash* entradaBuscada = BuscarHash(sistemaIniciado->tabelaPorEmail, _email, FuncaoDeEspalhamentoString, CompararUsuarioPorEmail, &erroBusca);
     if(erroBusca!=ERRO_OK){
         return ERRO_LOGIN_EMAIL_NAO_ENCONTRADO;
@@ -142,6 +145,94 @@ CodigoErro LoginUsuario (SistemaUsuario* sistemaIniciado, char* _email, char*_se
     *usuarioLogado = entradaBuscada->valor;
     return ERRO_LOGIN_SUCESSO;
 
+
+
+}
+CodigoErro LiberarUsuarios(SistemaUsuario* sistema){
+    CodigoErro erroLiberarAvl = ERRO_OK;
+
+    LiberarUsuariosAVL(sistema->arvoreUsuarios->raiz, &erroLiberarAvl );
+    if(erroLiberarAvl!=ERRO_OK){
+        return erroLiberarAvl;
+    }
+
+    CodigoErro erroLiberarHash = ERRO_OK;
+    LiberarUsuariosHash(sistema->tabelaPorEmail, &erroLiberarHash);
+    if(erroLiberarHash!=ERRO_OK){
+        return erroLiberarHash;
+    }
+    return ERRO_OK;
+
+
+}
+
+void LiberarUsuariosHash(Hash* tabelaHash, CodigoErro* erro){
+    for (int i=0; i<tabelaHash->tamanhoVetorHash; i++){
+        if(tabelaHash->hashVetor[i]->cabeca->prox){
+            NoLista* atual = tabelaHash->hashVetor[i]->cabeca->prox;
+            while(atual!=NULL){
+                free(atual->dado);
+                atual->dado=NULL;
+                atual = atual->prox;
+                if(atual->dado){
+                    if(erro) *erro = ERRO_USUARIO_NAO_REMOVIDO;
+                    return;
+                }
+            }
+        }
+    }
+}
+
+void LiberarUsuariosAVL(NoAvl* raiz, CodigoErro* erro){
+    if(!raiz){
+        return;
+    }
+    if(raiz->esq!=NULL) LiberarUsuariosAVL(raiz->esq, erro);
+    if(raiz->dir!=NULL) LiberarUsuariosAVL(raiz->dir, erro);
+
+    if(raiz->dado){
+        free(raiz->dado);
+        raiz->dado =NULL;
+        if(erro) *erro = ERRO_OK;
+    }
+    if(raiz->dado){
+        if(erro) *erro = ERRO_USUARIO_NAO_REMOVIDO;
+        return;
+    }
+
+}
+
+
+
+
+CodigoErro EncerrarSistema(SistemaUsuario** sistema){
+    printf("1\n");
+    if(!sistema||*sistema==NULL){
+        return ERRO_SISTEMA_NAO_INICIADO;
+    }
+
+    CodigoErro statusLiberarUsuarios = LiberarUsuarios((*sistema));
+    printf("2\n");
+    if(statusLiberarUsuarios!=ERRO_OK){
+        return statusLiberarUsuarios;
+    }
+
+    (*sistema)->arvoreUsuarios = LiberarAvl((*sistema)->arvoreUsuarios);
+    printf("3\n");
+
+    if((*sistema)->arvoreUsuarios!=NULL){
+        return ERRO_LIBERAR_AVL;
+    }
+    (*sistema)->tabelaPorEmail = LiberarHash((*sistema)->tabelaPorEmail);
+    printf("4\n");
+    if((*sistema)->tabelaPorEmail!=NULL){
+        return ERRO_LIBERAR_HASH;
+    }
+
+    free(*sistema);
+    printf("5\n");
+    *sistema =NULL;
+    return ERRO_OK;
 
 
 }

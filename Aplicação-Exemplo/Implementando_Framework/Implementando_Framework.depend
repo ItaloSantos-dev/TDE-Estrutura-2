@@ -1,0 +1,30 @@
+# depslib dependency file v1.0
+1763579737 source:e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\aplicação-exemplo\implementando_framework\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"sistema_usuario.h"
+
+1763574569 e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\framework\validacao_login_framework-makefile\include\sistema_usuario.h
+	"avl.h"
+	"util.h"
+	"hash.h"
+	"usuario.h"
+	"erros.h"
+
+1763569518 e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\framework\validacao_login_framework-makefile\include\avl.h
+	"erros.h"
+
+1763580091 e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\framework\validacao_login_framework-makefile\include\erros.h
+
+1763228711 e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\framework\validacao_login_framework-makefile\include\util.h
+
+1763569552 e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\framework\validacao_login_framework-makefile\include\hash.h
+	"listaEncadeada.h"
+	"erros.h"
+
+1763569685 e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\framework\validacao_login_framework-makefile\include\listaencadeada.h
+	"erros.h"
+
+1763428065 e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\framework\validacao_login_framework-makefile\include\usuario.h
+
