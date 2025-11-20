@@ -37,10 +37,11 @@ int CompararUsuarioPorId(void*_user1 , void*_user2){
 
 }
 
-int CompararUsuarioPorEmail(void* _email, void* _user2){
-    char* u1 = (char*)_email;
-    User* u2 = (User*)_user2;
+int CompararUsuarioPorEmail(void* _u1, void* _u2){
+    User* u1 = (User*)_u1;
+    User* u2 = (User*)_u2;
 
-    return strcmp(u1, u2->email);
-
+    return strcmp(u1->email, u2->email);
 }
+
+

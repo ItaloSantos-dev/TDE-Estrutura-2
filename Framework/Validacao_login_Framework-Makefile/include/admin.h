@@ -4,12 +4,15 @@
 
 void ListarUsuarios (SistemaUsuario* sistemaIniciado, void(*ExibirDados)(void* dado));
 
-CodigoErro admin_CriarUsuario(SistemaUsuario* sistemaIniciado, User*(*CapturarDados)(void* id));
+CodigoErro AdminCriarUsuario(SistemaUsuario* sistemaIniciado, User* novoUsuario);
 
 CodigoErro DeletarUsuario(SistemaUsuario* sistemaIniciado, char* _email);
 
-CodigoErro EditarUsuario(SistemaUsuario* sistemaInicado, char* _email, char* novoNome, char* novoSobrenome, char*novaSenha);
+CodigoErro AdminEditarUsuario(User* userBuscado, int novoId, int novoTipo, char* novoNome, char* novoSobrenome, char*novaSenha);
 
-void  EditarDadosUsuario(User* usuariouscado, char* novoNome, char* novoSobrenome, char* novaSenha);
+int CompararUsuarioPorEmailAvl(void* dado, void* _u2);
+
+
+
 
 #endif // ADMIN_H_INCLUDED

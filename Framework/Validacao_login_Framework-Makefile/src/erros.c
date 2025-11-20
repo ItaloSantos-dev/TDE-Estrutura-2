@@ -46,6 +46,7 @@ const char* CodigoErroParaTexto(CodigoErro erro) {
         case ERRO_LIBERAR_HASH: return "Falha ao liberara HASH";
         case ERRO_USUARIO_NAO_REMOVIDO: return "Falha ao liberar User* das estruturas";
         case ERRO_EMAIL_INVALIDO: return "Email invalido";
+        case ERRO_ADMIN_NAO_CRIADO: return "Admin nao criado";
 
         default: return "Erro não mapeado";
     }

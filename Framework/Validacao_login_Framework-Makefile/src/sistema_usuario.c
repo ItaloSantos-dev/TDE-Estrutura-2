@@ -34,6 +34,17 @@ CodigoErro IniciarSistemaUsuarios(SistemaUsuario** sistema){
         free(novoSistema);
         return erro;
     }
+    char adminNome[] = "admin";
+    char adminSobrenome[] = "admin";
+    char adminEmail[] = "admin@.com";
+    char adminSenha[] = "admin123";
+    User* admin = CriarUsuario(1, adminNome, adminSobrenome, adminEmail, adminSenha);
+    admin->admin=1;
+
+    CodigoErro criarAdmin = InserirUsuarioEstruturas(novoSistema, admin);
+    if(criarAdmin!=ERRO_OK){
+        return ERRO_ADMIN_NAO_CRIADO;
+    }
     *sistema = novoSistema;
     return ERRO_OK;
 
@@ -174,14 +185,12 @@ void LiberarUsuariosHash(Hash* tabelaHash, CodigoErro* erro){
                 free(atual->dado);
                 atual->dado=NULL;
                 atual = atual->prox;
-                if(atual->dado){
-                    if(erro) *erro = ERRO_USUARIO_NAO_REMOVIDO;
-                    return;
-                }
             }
         }
     }
 }
+
+
 
 void LiberarUsuariosAVL(NoAvl* raiz, CodigoErro* erro){
     if(!raiz){
@@ -206,35 +215,69 @@ void LiberarUsuariosAVL(NoAvl* raiz, CodigoErro* erro){
 
 
 CodigoErro EncerrarSistema(SistemaUsuario** sistema){
-    printf("1\n");
+
     if(!sistema||*sistema==NULL){
         return ERRO_SISTEMA_NAO_INICIADO;
     }
 
     CodigoErro statusLiberarUsuarios = LiberarUsuarios((*sistema));
-    printf("2\n");
     if(statusLiberarUsuarios!=ERRO_OK){
         return statusLiberarUsuarios;
     }
 
     (*sistema)->arvoreUsuarios = LiberarAvl((*sistema)->arvoreUsuarios);
-    printf("3\n");
 
     if((*sistema)->arvoreUsuarios!=NULL){
         return ERRO_LIBERAR_AVL;
     }
     (*sistema)->tabelaPorEmail = LiberarHash((*sistema)->tabelaPorEmail);
-    printf("4\n");
     if((*sistema)->tabelaPorEmail!=NULL){
         return ERRO_LIBERAR_HASH;
     }
 
     free(*sistema);
-    printf("5\n");
     *sistema =NULL;
     return ERRO_OK;
 
 
 }
+
+void  EditarDadosUsuario(User* usuariouscado, char* novoNome, char* novoSobrenome, char* novaSenha){
+
+    strncpy(usuariouscado->nome, novoNome, sizeof(usuariouscado->nome));
+    strncpy(usuariouscado->sobrenome, novoSobrenome, sizeof(usuariouscado->sobrenome));
+    strncpy(usuariouscado->senha, novaSenha, sizeof(usuariouscado->senha));
+
+    usuariouscado->nome[sizeof(usuariouscado->nome)-1] = '\0';
+    usuariouscado->sobrenome[sizeof(usuariouscado->sobrenome)-1] = '\0';
+    usuariouscado->senha[sizeof(usuariouscado->senha)-1] = '\0';
+
+}
+
+
+CodigoErro UsuarioEditarUsuario(SistemaUsuario* sistemaInicado, char* _email, char* novoNome, char* novoSobrenome, char*novaSenha){
+
+    CodigoErro erroBuscaHash = ERRO_OK;
+    EntradaHash* entradaHashBuscada = BuscarHash(sistemaInicado->tabelaPorEmail, _email, FuncaoDeEspalhamentoString, CompararEntradaHashChave, &erroBuscaHash);
+    if(erroBuscaHash!=ERRO_OK){
+        return erroBuscaHash;
+    }
+    User* usuariouscado =(User*) entradaHashBuscada->valor;
+    EditarDadosUsuario(usuariouscado, novoNome, novoSobrenome, novaSenha);
+    return erroBuscaHash;
+
+}
+
+User* BuscarUsuario (SistemaUsuario* sistema, char* _email){
+    CodigoErro erroBusca =ERRO_OK;
+    EntradaHash* hashBuscada =  BuscarHash(sistema->tabelaPorEmail, _email, FuncaoDeEspalhamentoString, CompararEntradaHashChave, &erroBusca);
+    if(!hashBuscada){
+        return NULL;
+    }
+    return hashBuscada->valor;
+
+}
+
+
 
 

@@ -3,13 +3,28 @@
 #include<string.h>
 #include "admin.h"
 
-void ListarUsuarios (SistemaUsuario* sistemaIniciado, void(*ExibirDados)(void* dado)){
-    ImprimirAvl(sistemaIniciado->arvoreUsuarios->raiz, ExibirDados );
+int CompararUsuarioPorEmailAvl(void* dado, void* _u2){
+    char* _email = (char*)dado;
+    User* u2 = (User*)_u2;
+
+    return strcmp(_email, u2->email);
 }
 
-CodigoErro admin_CriarUsuario(SistemaUsuario* sistemaIniciado, User*(*CapturarDados)(void* id)){
-    User* novoUser = CapturarDados(sistemaIniciado);
-    return CadastrarUsuario(sistemaIniciado, novoUser);
+void ListarUsuarios (SistemaUsuario* sistemaIniciado, void(*ExibirDados)(void* dado)){
+    ImprimirAvl(sistemaIniciado->arvoreUsuarios->raiz, ExibirDados);
+}
+
+CodigoErro AdminCriarUsuario(SistemaUsuario* sistemaIniciado, User* novoUsuario){
+    CodigoErro erroEmail =ERRO_OK;
+    erroEmail = ValidarNovoemail(sistemaIniciado->tabelaPorEmail, novoUsuario);
+    if(erroEmail==ERRO_OK){
+        return EMAIL_JA_EXISTENTE;
+    }
+    if(ValidarStringEmail(novoUsuario->email)==0){
+        return ERRO_EMAIL_INVALIDO;
+    }
+
+    return CadastrarUsuario(sistemaIniciado, novoUsuario);
 }
 
 CodigoErro DeletarUsuario(SistemaUsuario* sistemaIniciado, char* _email){
@@ -22,7 +37,7 @@ CodigoErro DeletarUsuario(SistemaUsuario* sistemaIniciado, char* _email){
     }
 
     CodigoErro erroAvl= ERRO_OK;
-    sistemaIniciado->arvoreUsuarios->raiz = RemoverNoAvl(sistemaIniciado->arvoreUsuarios, sistemaIniciado->arvoreUsuarios->raiz, _email, CompararUsuarioPorEmail, &erroAvl);
+    sistemaIniciado->arvoreUsuarios->raiz = RemoverNoAvl(sistemaIniciado->arvoreUsuarios, sistemaIniciado->arvoreUsuarios->raiz, _email, CompararUsuarioPorEmailAvl, &erroAvl);
 
     if(erroAvl!=ERRO_OK){
         return erroAvl;
@@ -30,28 +45,18 @@ CodigoErro DeletarUsuario(SistemaUsuario* sistemaIniciado, char* _email){
 
     return ERRO_OK;
 }
-CodigoErro EditarUsuario(SistemaUsuario* sistemaInicado, char* _email, char* novoNome, char* novoSobrenome, char*novaSenha){
+CodigoErro AdminEditarUsuario(User* userBuscado, int novoId, int novoTipo, char* novoNome, char* novoSobrenome, char*novaSenha){
 
-    CodigoErro erroBuscaHash = ERRO_OK;
-    EntradaHash* entradaHashBuscada = BuscarHash(sistemaInicado->tabelaPorEmail, _email, FuncaoDeEspalhamentoString, CompararEntradaHashChave, &erroBuscaHash);
-    if(erroBuscaHash!=ERRO_OK){
-        return erroBuscaHash;
-    }
-    User* usuariouscado =(User*) entradaHashBuscada->valor;
-    EditarDadosUsuario(usuariouscado, novoNome, novoSobrenome, novaSenha);
-    return erroBuscaHash;
+    userBuscado->id = novoId;
+    userBuscado->admin = novoTipo;
+    strcpy(userBuscado->nome, novoNome);
+    strcpy(userBuscado->sobrenome, novoSobrenome);
+    strcpy(userBuscado->senha, novaSenha);
 
-}
-void  EditarDadosUsuario(User* usuariouscado, char* novoNome, char* novoSobrenome, char* novaSenha){
-
-    strncpy(usuariouscado->nome, novoNome, sizeof(usuariouscado->nome));
-    strncpy(usuariouscado->sobrenome, novoSobrenome, sizeof(usuariouscado->sobrenome));
-    strncpy(usuariouscado->senha, novaSenha, sizeof(usuariouscado->senha));
-
-    usuariouscado->nome[sizeof(usuariouscado->nome)-1] = '\0';
-    usuariouscado->sobrenome[sizeof(usuariouscado->sobrenome)-1] = '\0';
-    usuariouscado->senha[sizeof(usuariouscado->senha)-1] = '\0';
+    return ERRO_OK;
 
 }
+
+
 
 

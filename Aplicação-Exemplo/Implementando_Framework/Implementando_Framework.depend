@@ -1,11 +1,13 @@
 # depslib dependency file v1.0
-1763579737 source:e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\aplicação-exemplo\implementando_framework\main.c
+1763673432 source:e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\aplicação-exemplo\implementando_framework\main.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"sistema_usuario.h"
+	"admin.h"
+	"core/menu.h"
 
-1763574569 e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\framework\validacao_login_framework-makefile\include\sistema_usuario.h
+1763674851 e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\framework\validacao_login_framework-makefile\include\sistema_usuario.h
 	"avl.h"
 	"util.h"
 	"hash.h"
@@ -15,7 +17,7 @@
 1763569518 e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\framework\validacao_login_framework-makefile\include\avl.h
 	"erros.h"
 
-1763580091 e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\framework\validacao_login_framework-makefile\include\erros.h
+1763605787 e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\framework\validacao_login_framework-makefile\include\erros.h
 
 1763228711 e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\framework\validacao_login_framework-makefile\include\util.h
 
@@ -27,4 +29,17 @@
 	"erros.h"
 
 1763428065 e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\framework\validacao_login_framework-makefile\include\usuario.h
+
+1763678077 e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\framework\validacao_login_framework-makefile\include\admin.h
+	"sistema_usuario.h"
+
+1763678437 e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\aplicação-exemplo\implementando_framework\core\menu.h
+	"sistema_usuario.h"
+	"admin.h"
+
+1763678728 source:e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\aplicação-exemplo\implementando_framework\core\menu.c
+	<string.h>
+	<stdio.h>
+	<stdlib.h>
+	"menu.h"
 

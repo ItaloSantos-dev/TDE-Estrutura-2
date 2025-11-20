@@ -36,6 +36,10 @@
 			<Add library="../../Framework/Validacao_login_Framework-Makefile/build/libmeuframework.a" />
 			<Add directory="../../Framework/Validacao_login_Framework-Makefile/build" />
 		</Linker>
+		<Unit filename="core/menu.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="core/menu.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>

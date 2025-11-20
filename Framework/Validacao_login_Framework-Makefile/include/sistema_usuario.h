@@ -38,6 +38,11 @@ void LiberarUsuariosHash(Hash* tabelaHash, CodigoErro* erro);
 
 CodigoErro LiberarUsuarios(SistemaUsuario* sistema);
 
+void  EditarDadosUsuario(User* usuariouscado, char* novoNome, char* novoSobrenome, char* novaSenha);
+
+CodigoErro UsuarioEditarUsuario(SistemaUsuario* sistemaInicado, char* _email, char* novoNome, char* novoSobrenome, char*novaSenha);
+User* BuscarUsuario (SistemaUsuario* sistema, char* _email);
+
 
 
 
