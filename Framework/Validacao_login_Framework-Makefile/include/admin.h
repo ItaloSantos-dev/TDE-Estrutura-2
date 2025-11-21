@@ -10,7 +10,6 @@ CodigoErro DeletarUsuario(SistemaUsuario* sistemaIniciado, char* _email);
 
 CodigoErro AdminEditarUsuario(User* userBuscado, int novoId, int novoTipo, char* novoNome, char* novoSobrenome, char*novaSenha);
 
-int CompararUsuarioPorEmailAvl(void* dado, void* _u2);
 
 
 

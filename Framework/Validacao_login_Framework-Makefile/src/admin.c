@@ -3,12 +3,7 @@
 #include<string.h>
 #include "admin.h"
 
-int CompararUsuarioPorEmailAvl(void* dado, void* _u2){
-    char* _email = (char*)dado;
-    User* u2 = (User*)_u2;
 
-    return strcmp(_email, u2->email);
-}
 
 void ListarUsuarios (SistemaUsuario* sistemaIniciado, void(*ExibirDados)(void* dado)){
     ImprimirAvl(sistemaIniciado->arvoreUsuarios->raiz, ExibirDados);

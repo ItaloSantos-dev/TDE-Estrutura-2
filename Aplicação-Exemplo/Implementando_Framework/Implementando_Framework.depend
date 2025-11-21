@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1763673432 source:e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\aplicação-exemplo\implementando_framework\main.c
+1763679289 source:e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\aplicação-exemplo\implementando_framework\main.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -7,7 +7,7 @@
 	"admin.h"
 	"core/menu.h"
 
-1763674851 e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\framework\validacao_login_framework-makefile\include\sistema_usuario.h
+1763680781 e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\framework\validacao_login_framework-makefile\include\sistema_usuario.h
 	"avl.h"
 	"util.h"
 	"hash.h"
@@ -30,16 +30,37 @@
 
 1763428065 e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\framework\validacao_login_framework-makefile\include\usuario.h
 
-1763678077 e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\framework\validacao_login_framework-makefile\include\admin.h
+1763680947 e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\framework\validacao_login_framework-makefile\include\admin.h
 	"sistema_usuario.h"
 
-1763678437 e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\aplicação-exemplo\implementando_framework\core\menu.h
+1763679670 e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\aplicação-exemplo\implementando_framework\core\menu.h
 	"sistema_usuario.h"
 	"admin.h"
+	"funcoes_admin.h"
+	"funcoes_usuario.h"
 
-1763678728 source:e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\aplicação-exemplo\implementando_framework\core\menu.c
+1763684282 source:e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\aplicação-exemplo\implementando_framework\core\menu.c
 	<string.h>
 	<stdio.h>
 	<stdlib.h>
 	"menu.h"
+
+1763679273 e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\aplicação-exemplo\implementando_framework\core\funcoes_admin.h
+	"sistema_usuario.h"
+	"admin.h"
+
+1763679147 source:e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\aplicação-exemplo\implementando_framework\core\funcoes_admin.c
+	<string.h>
+	<stdio.h>
+	<stdlib.h>
+	"funcoes_admin.h"
+
+1763684282 source:e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\aplicação-exemplo\implementando_framework\core\funcoes_usuario.c
+	<string.h>
+	<stdio.h>
+	<stdlib.h>
+	"funcoes_usuario.h"
+
+1763680462 e:\facema\estudos\estruturadedados\segundotde\tde-estruta-2\aplicação-exemplo\implementando_framework\core\funcoes_usuario.h
+	"sistema_usuario.h"
 

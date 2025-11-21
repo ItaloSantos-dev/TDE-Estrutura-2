@@ -43,6 +43,9 @@ void  EditarDadosUsuario(User* usuariouscado, char* novoNome, char* novoSobrenom
 CodigoErro UsuarioEditarUsuario(SistemaUsuario* sistemaInicado, char* _email, char* novoNome, char* novoSobrenome, char*novaSenha);
 User* BuscarUsuario (SistemaUsuario* sistema, char* _email);
 
+CodigoErro UsuarioDeletarConta (SistemaUsuario* sistema, User* usuarioLogado);
+int CompararUsuarioPorEmailAvl(void* dado, void* _u2);
+
 
 
 

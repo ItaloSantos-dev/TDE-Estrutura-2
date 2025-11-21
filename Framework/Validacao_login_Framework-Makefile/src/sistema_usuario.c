@@ -279,5 +279,31 @@ User* BuscarUsuario (SistemaUsuario* sistema, char* _email){
 }
 
 
+CodigoErro UsuarioDeletarConta (SistemaUsuario* sistema, User* usuarioLogado){
+    CodigoErro erroHash= ERRO_OK;
+    RemoverHash(sistema->tabelaPorEmail, usuarioLogado->email, FuncaoDeEspalhamentoString, CompararEntradaHashChave, &erroHash);
+
+    if(erroHash!=ERRO_OK){
+        return erroHash;
+    }
+
+    CodigoErro erroAvl= ERRO_OK;
+    sistema->arvoreUsuarios->raiz = RemoverNoAvl(sistema->arvoreUsuarios, sistema->arvoreUsuarios->raiz, usuarioLogado->email, CompararUsuarioPorEmailAvl, &erroAvl);
+
+    if(erroAvl!=ERRO_OK){
+        return erroAvl;
+    }
+
+    return ERRO_OK;
+}
+
+int CompararUsuarioPorEmailAvl(void* dado, void* _u2){
+    char* _email = (char*)dado;
+    User* u2 = (User*)_u2;
+
+    return strcmp(_email, u2->email);
+}
+
+
 
 
